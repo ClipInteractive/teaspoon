@@ -40,7 +40,9 @@ module Teaspoon
     end
 
     def self.prepend_routes(app)
-      return if Teaspoon::Engine.routes.recognize_path('/') rescue nil
+      # Fix for not being able to run teaspoon in the browser.  See suggested
+      # fix in: https://github.com/modeset/teaspoon/issues/191
+      # return if Teaspoon::Engine.routes.recognize_path('/') rescue nil
       require Teaspoon::Engine.root.join("app/controllers/teaspoon/suite_controller")
 
       app.routes.prepend do
